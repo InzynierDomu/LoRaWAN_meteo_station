@@ -8,6 +8,7 @@ function Decoder(bytes, port) {
 	  var pres = '';
 	  var light = '';
 	  var moisture ='';
+	  var rain = '';
 	  
 	  while(i < msg.length && msg[i] != "H")
 	  {
@@ -45,12 +46,21 @@ function Decoder(bytes, port) {
 	
 	i++;
 	
-	while(i < msg.length)
+	while(i < msg.length && msg[i] != "R")
 	  {
 		moisture += msg[i];
 		i++;
 	  }
 	decoded.moisture = moisture;
+	
+	i++;
+	
+	while(i < msg.length)
+	  {
+		rain += msg[i];
+		i++;
+	  }
+	decoded.rain = rain;
 	
 	i++;
 	
