@@ -16,4 +16,5 @@ struct Results
   uint16_t pressure;
   uint16_t light_intensity;
   uint16_t soil_moisture;
+  uint32_t rain_pulses;
 };

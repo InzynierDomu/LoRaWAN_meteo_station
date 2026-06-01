@@ -40,10 +40,16 @@ void setup()
 
 void loop()
 {
-  Serial.print("Rain pulses: ");
-  Serial.println(rain_counter);
-
   m_measurements.measure(m_results);
+
+  noInterrupts();
+  m_results.rain_pulses = rain_counter;
+  rain_counter = 0;
+  interrupts();
+
+  Serial.print("Rain pulses: ");
+  Serial.println(m_results.rain_pulses);
+
   m_lorawan.send_msg_measurements(m_results);
   LowPower.deepSleep(Config::uplink_interval);
 }
